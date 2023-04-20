@@ -18,7 +18,14 @@ const initialState = CATEGORIES.map((category) => ({
 const budgetsSlice = createSlice({
   name: "budgets",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    ditBudget: (state, action) => {
+      state.map((state) => ({
+        category: action.payload.category,
+        amount: action.payload.ammount,
+      }));
+    },
+  },
 });
 
 export const editBudget = (budget) => {
