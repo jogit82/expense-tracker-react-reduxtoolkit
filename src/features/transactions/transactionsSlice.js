@@ -1,3 +1,4 @@
+import { createSlice } from "@reduxjs/toolkit";
 export const CATEGORIES = [
   "housing",
   "food",
@@ -13,12 +14,15 @@ const initialState = Object.fromEntries(
   CATEGORIES.map((category) => [category, []])
 );
 
-export const addTransaction = (transaction) => {
-  return {
-    type: "transactions/addTransaction",
-    payload: transaction,
-  };
-};
+const transactionsSlice = createSlice({
+  name: "transactions",
+  initialState: initialState,
+  reducers: {
+    addTransaction: (state, action) => {
+      state[action.payload.category].push(action.payload);
+    },
+  },
+});
 
 export const deleteTransaction = (transaction) => {
   return {
@@ -34,15 +38,6 @@ export const selectFlattenedTransactions = (state) =>
 const transactionsReducer = (state = initialState, action) => {
   let newTransactionsForCategory;
   switch (action.type) {
-    case "transactions/addTransaction":
-      newTransactionsForCategory = [
-        ...state[action.payload.category].slice(),
-        action.payload,
-      ];
-      return {
-        ...state,
-        [action.payload.category]: newTransactionsForCategory,
-      };
     case "transactions/deleteTransaction":
       const deletedIndex = state[action.payload.category].findIndex(
         (transaction) => transaction.id === action.payload.id
@@ -59,4 +54,5 @@ const transactionsReducer = (state = initialState, action) => {
   }
 };
 
-export default transactionsReducer;
+export const { addTransaction } = transactionsSlice.actions;
+export default transactionsSlice.reducer;
