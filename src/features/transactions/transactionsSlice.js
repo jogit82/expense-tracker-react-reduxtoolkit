@@ -21,38 +21,18 @@ const transactionsSlice = createSlice({
     addTransaction: (state, action) => {
       state[action.payload.category].push(action.payload);
     },
+    deleteTransaction: (state, action) => {
+      let category = action.payload.category;
+      state[category] = state[category].filter(
+        (transaction) => transaction.id !== action.payload.id
+      );
+    },
   },
 });
-
-export const deleteTransaction = (transaction) => {
-  return {
-    type: "transactions/deleteTransaction",
-    payload: transaction,
-  };
-};
 
 export const selectTransactions = (state) => state.transactions;
 export const selectFlattenedTransactions = (state) =>
   Object.values(state.transactions).reduce((a, b) => [...a, ...b], []);
 
-const transactionsReducer = (state = initialState, action) => {
-  let newTransactionsForCategory;
-  switch (action.type) {
-    case "transactions/deleteTransaction":
-      const deletedIndex = state[action.payload.category].findIndex(
-        (transaction) => transaction.id === action.payload.id
-      );
-      newTransactionsForCategory = state[action.payload.category].filter(
-        (item, index) => index !== deletedIndex
-      );
-      return {
-        ...state,
-        [action.payload.category]: newTransactionsForCategory,
-      };
-    default:
-      return state;
-  }
-};
-
-export const { addTransaction } = transactionsSlice.actions;
+export const { addTransaction, deleteTransaction } = transactionsSlice.actions;
 export default transactionsSlice.reducer;

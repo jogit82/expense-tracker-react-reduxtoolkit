@@ -20,11 +20,9 @@ const budgetsSlice = createSlice({
   initialState: initialState,
   reducers: {
     editBudget: (state, action) => {
-      state.map((budget) => {
-        if (budget.category === action.payload.category) {
-          budget.amount = action.payload.amount;
-        }
-      });
+      const category = action.payload.category;
+      state.find((budget) => budget.category === category).amount =
+        action.payload.amount;
     },
   },
 });
