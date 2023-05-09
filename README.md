@@ -38,7 +38,8 @@ This project—a budgeting and expense tracking app—allows you to practice ref
 ### Screenshots of finished project:
 ![Figure 1 - Expense category](https://github.com/jogit82/expense-tracker-react-reduxtoolkit/blob/master/Screenshot%202023-05-09%20at%2011.03.33%20AM.png?raw=true)
 
-![Figure 2 - Expense History](github.com/jogit82/expense-tracker-react-reduxtoolkit/blob/master/Screenshot%202023-05-09%20at%2011.04.00%20AM.png?raw=true)
+
+![Figure 2 - Expense History](https://github.com/jogit82/expense-tracker-react-reduxtoolkit/blob/master/Screenshot%202023-05-09%20at%2011.04.00%20AM.png?raw=true)
 
 # Getting Started with Create React App and Redux
 
